@@ -1,20 +1,12 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ng-container *ngIf="a$ | async; let aa;">
+    <cdk-virtual-scroll-viewport [itemSize]="61" style="height: 600px;">
+      <ng-container *cdkVirtualFor="let a of aa">
+          <!-- Using ionic components inside cdkVirtualFor causes chunk loading failures -->
+          <ion-label></ion-label>
+          <!-- Using other components does not present this error in the test -->
+          <app-my-component></app-my-component>
+        </ng-container>
+      </cdk-virtual-scroll-viewport>
+  </ng-container>
 </ion-content>
